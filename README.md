@@ -21,13 +21,13 @@ ModPingBot is a lightweight Discord bot that allows users to alert moderators pr
 
 Click the fork button or run:
 
-{```bash
-git clone https://github.com/yourusername/modpingbot.git
-cd modpingbot
-}
+(```bash
+(git clone https://github.com/yourusername/modpingbot.git
+cd modpingbot)
+)
 ---
 
-###  2. 🧠 Set Up Your config.json
+### 2. 🧠 Set Up Your config.json
 Create or edit config.json in the root directory. Example:
 {
   "default": {
