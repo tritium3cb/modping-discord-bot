@@ -26,7 +26,11 @@ async def modping(interaction: discord.Interaction, reason: str):
     author = interaction.user
 
     # Find the #bot-notifs channel
-    channel = discord.utils.get(guild.text_channels, name="bot-notifs")
+    channel = (
+    discord.utils.get(guild.text_channels, name="bot-notifs") or
+    discord.utils.get(guild.text_channels, name="moderators")
+)
+    
     if not channel:
         await interaction.response.send_message("❌ Couldn't find the #bot-notifs channel.", ephemeral=True)
         return
