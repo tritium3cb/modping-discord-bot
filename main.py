@@ -46,7 +46,7 @@ async def modping(interaction: discord.Interaction, reason: str):
 
 import os
 
-token = os.environ.get("DISCORD_BOT_TOKEN")
+token = os.environ.get("DISCORD_TOKEN")
 print(f"DEBUG: Token starts with {token[:10]}... (length: {len(token) if token else 'None'})")
 
 # --- Run the bot ---
