@@ -100,26 +100,26 @@ async def modping(interaction: discord.Interaction, reason: str):
     title=f"{t('mod_ping', server_config)} {author.display_name}",
     description=reason,
     color=discord.Color.red() if is_high_priority else discord.Color.orange()
-)
-embed.add_field(name=t("origin_channel", server_config), value=origin_channel.mention, inline=False)
-embed.add_field(name=t("sent", server_config), value=timestamp, inline=False)
-embed.set_footer(text=f"User ID: {author.id}")
-embed.set_thumbnail(url=author.display_avatar.url)
+    )
+    embed.add_field(name=t("origin_channel", server_config), value=origin_channel.mention, inline=False)
+    embed.add_field(name=t("sent", server_config), value=timestamp, inline=False)
+    embed.set_footer(text=f"User ID: {author.id}")
+    embed.set_thumbnail(url=author.display_avatar.url)
 
-message = await channel.send(
-    content=prefix + ', '.join(role_mentions),
-    embed=embed
-)
+    message = await channel.send(
+        content=prefix + ', '.join(role_mentions),
+        embed=embed
+    )
 
-await message.add_reaction("✅")
+    await message.add_reaction("✅")
 
-await interaction.response.send_message(t("public_confirm", server_config), ephemeral=True)
+    await interaction.response.send_message(t("public_confirm", server_config), ephemeral=True)
 
-# Send DM confirmation
-try:
-    await author.send(t("dm_confirm", server_config))
-except discord.Forbidden:
-    pass  # User has DMs disabled
+    # Send DM confirmation
+    try:
+        await author.send(t("dm_confirm", server_config))
+    except discord.Forbidden:
+        pass  # User has DMs disabled
 
 @bot.event
 async def on_raw_reaction_add(payload):
