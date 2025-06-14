@@ -32,7 +32,7 @@ async def modping(interaction: discord.Interaction, reason: str):
         return
 
     # Find Moderator/Admin roles
-    mod_roles = ["Moderator", "Admin"]
+    mod_roles = ["Moderator", "Admin", "Moderators"]
     role_mentions = [role.mention for role in guild.roles if role.name in mod_roles]
 
     if not role_mentions:
