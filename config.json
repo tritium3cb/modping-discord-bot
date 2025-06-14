@@ -2,5 +2,6 @@
   "default": {
     "notification_channels": ["bot-notifs"],
     "ping_roles": ["Moderator", "Admin"]
+    "language": "en"
   }
 }
