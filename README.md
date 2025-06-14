@@ -21,14 +21,15 @@ ModPingBot is a lightweight Discord bot that allows users to alert moderators pr
 
 Click the fork button or run:
 
-(```bash
-(git clone https://github.com/yourusername/modpingbot.git
-cd modpingbot)
-)
+```bash
+git clone https://github.com/yourusername/modpingbot.git
+cd modpingbot
+```
 ---
 
 ### 2. 🧠 Set Up Your config.json
 Create or edit config.json in the root directory. Example:
+```json
 {
   "default": {
     "notification_channels": ["bot-notifs"],
@@ -39,6 +40,7 @@ Create or edit config.json in the root directory. Example:
     "ping_roles": ["ModTeam"]
   }
 }
+```
 Replace 123456789012345678 with your Discord server’s ID.
 
 notification_channels is a list of channel names where alerts will be sent.
@@ -61,11 +63,13 @@ Fill in Render’s setup:
 Environment: Python
 
 Build Command:
+```bash
 pip install -r requirements.txt
-
+```
 Start Command:
+```bash
 python main.py
-
+```
 Add an Environment Variable:
 
 Key: DISCORD_TOKEN
