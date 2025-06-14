@@ -49,3 +49,7 @@ token = os.environ.get("DISCORD_TOKEN")
 
 # --- Run the bot ---
 bot.run(token)
+
+from keep_alive import keep_alive
+
+keep_alive()  # starts the webserver
