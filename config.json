@@ -1,6 +1,6 @@
 {
   "default": {
-    "notification_channels": ["bot-notifs", "moderators"],
+    "notification_channels": ["bot-notifs"],
     "ping_roles": ["Moderator", "Admin"]
   }
 }
