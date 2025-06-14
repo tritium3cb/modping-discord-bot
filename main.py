@@ -32,6 +32,13 @@ async def modping(interaction: discord.Interaction, reason: str):
     author = interaction.user
     origin_channel = interaction.channel
 
+    # --- Escalation keyword detection ---
+    priority_keywords = ["suicide", "self-harm", "urgent", "help now", "danger", "immediate help"]
+    is_high_priority = any(word in reason.lower() for word in priority_keywords)
+
+    if is_high_priority:
+        print("[ALERT] High-priority keyword detected.")
+
     # Optional debug print
     print(f"[DEBUG] Origin Channel: {origin_channel.name} (ID: {origin_channel.id})")
 
@@ -63,13 +70,16 @@ async def modping(interaction: discord.Interaction, reason: str):
     timestamp = discord.utils.format_dt(datetime.utcnow(), style='F')  # Full date and time
    
     # Compose and send message with timestamp
+    prefix = "🚨 **HIGH PRIORITY ALERT**\n\n" if is_high_priority else ""
     ping_message = (
+        f"{prefix}"
         f"🔔 **Mod Ping from {author.mention}**\n\n"
         f"**Reason:** {reason}\n"
         f"{', '.join(role_mentions)}\n\n"
         f"📍 **Origin Channel:** {origin_channel.mention}\n"
         f"📅 **Sent:** {timestamp}"
-)
+    )
+
     await channel.send(ping_message)
     await interaction.response.send_message("✅ Your message was sent privately to the mods.", ephemeral=True)
 
