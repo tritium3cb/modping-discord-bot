@@ -30,6 +30,10 @@ async def on_ready():
 async def modping(interaction: discord.Interaction, reason: str):
     guild_id = str(interaction.guild.id)
     author = interaction.user
+    origin_channel = interaction.channel
+
+    # Optional debug print
+    print(f"[DEBUG] Origin Channel: {origin_channel.name} (ID: {origin_channel.id})")
 
     # Get server-specific config, or fallback to 'default'
     server_config = config.get(guild_id, config.get("default", {}))
@@ -63,6 +67,7 @@ async def modping(interaction: discord.Interaction, reason: str):
         f"🔔 **Mod Ping from {author.mention}**\n\n"
         f"**Reason:** {reason}\n"
         f"{', '.join(role_mentions)}\n\n"
+        f"📍 **Origin Channel:** {origin_channel.mention}\n"
         f"📅 **Sent:** {timestamp}"
 )
     await channel.send(ping_message)
