@@ -2,6 +2,7 @@
   "default": {
     "notification_channels": ["bot-notifs"],
     "ping_roles": ["Moderator", "Admin"],
-    "language": "en"
+    "language": "en",
+    "cooldown_seconds": 300
   }
 }
