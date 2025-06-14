@@ -47,9 +47,9 @@ async def modping(interaction: discord.Interaction, reason: str):
 
 token = os.environ.get("DISCORD_TOKEN")
 
-# --- Run the bot ---
-bot.run(token)
-
 from keep_alive import keep_alive
 
 keep_alive()  # starts the webserver
+
+# --- Run the bot ---
+bot.run(token)
