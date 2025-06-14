@@ -49,7 +49,5 @@ import os
 token = os.environ.get("DISCORD_BOT_TOKEN")
 print(f"DEBUG: Token starts with {token[:10]}... (length: {len(token) if token else 'None'})")
 
-bot.run(token)
-
 # --- Run the bot ---
 bot.run("DISCORD_TOKEN")
