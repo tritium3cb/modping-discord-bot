@@ -44,10 +44,7 @@ async def modping(interaction: discord.Interaction, reason: str):
     await channel.send(ping_message)
     await interaction.response.send_message("✅ Your message was sent privately to the mods.", ephemeral=True)
 
-import os
-
 token = os.environ.get("DISCORD_TOKEN")
-print(f"DEBUG: Token starts with {token[:10]}... (length: {len(token) if token else 'None'})")
 
 # --- Run the bot ---
-bot.run("DISCORD_TOKEN")
+bot.run(token)
