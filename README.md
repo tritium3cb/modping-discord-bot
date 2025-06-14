@@ -11,7 +11,24 @@ ModPingBot is a lightweight Discord bot that allows users to alert moderators pr
 - Automatically pings specific moderator/admin roles  
 - Sends user a confirmation via DM  
 - Per-server configuration using `config.json`  
-- Hosted for free using Render + UptimeRobot  
+- Hosted for free using Render + UptimeRobot
+
+---
+
+## 🌐 Language Support
+This bot supports the following languages for all user-facing messages:
+
+🇬🇧 English (en)
+
+🇩🇪 German (de)
+
+🇪🇸 Spanish (es)
+
+🇨🇳 Chinese (Simplified) (zh-CN)
+
+🇯🇵 Japanese (ja)
+
+🇫🇷 French (fr)
 
 ---
 
@@ -48,6 +65,41 @@ notification_channels is a list of channel names where alerts will be sent.
 ping_roles is a list of roles that will be tagged in the alert.
 
 The "default" config is used if a server-specific entry isn't found.
+
+### 🔧 Setting the Language
+To set the language used in messages, edit the config.json file and add the "language" field under the appropriate server section. For example:
+
+```json
+{
+  "default": {
+    "notification_channels": ["bot-notifs"],
+    "ping_roles": ["Moderator", "Admin"],
+    "language": "de"
+  }
+}
+```
+The "language" value must be one of the following codes:
+
+"en" – English
+
+"de" – German
+
+"es" – Spanish
+
+"zh-CN" – Simplified Chinese
+
+"ja" – Japanese
+
+"fr" – French
+
+If the language code is missing or invalid, the bot will fall back to English ("en").
+
+❓ FAQ
+Can the bot automatically detect the user's language?
+No — Discord does not expose users' client language settings via the API. Messages are shown in the language defined by the server's configuration in config.json.
+
+Can users choose their own language?
+Not yet — but support for per-user language preferences may be added in a future update. Contributions welcome!
 
 ---
 
