@@ -1,13 +1,16 @@
 import os
+import json
 import discord
 from discord import app_commands
 from discord.ext import commands
 
+# --- Load server config ---
+with open("config.json", "r") as f:
+    config = json.load(f)
+
 # --- Bot setup ---
 intents = discord.Intents.default()
 bot = commands.Bot(command_prefix="!", intents=intents)
-
-# Use the already-attached CommandTree
 modping_tree = bot.tree
 
 # --- Event: When the bot starts up ---
@@ -22,22 +25,28 @@ async def on_ready():
 @modping_tree.command(name="modping", description="Alert the moderators privately with a reason")
 @app_commands.describe(reason="Why are you pinging the mods?")
 async def modping(interaction: discord.Interaction, reason: str):
-    guild = interaction.guild
+    guild_id = str(interaction.guild.id)
     author = interaction.user
 
-    # Find the #bot-notifs channel
-    channel = (
-    discord.utils.get(guild.text_channels, name="bot-notifs") or
-    discord.utils.get(guild.text_channels, name="moderators")
-)
-    
+    # Get server-specific config, or fallback to 'default'
+    server_config = config.get(guild_id, config.get("default", {}))
+
+    # Try all configured channel names
+    channel = None
+    for channel_name in server_config.get("notification_channels", []):
+        channel = discord.utils.get(interaction.guild.text_channels, name=channel_name)
+        if channel:
+            break
+
     if not channel:
-        await interaction.response.send_message("❌ Couldn't find the #bot-notifs channel.", ephemeral=True)
+        await interaction.response.send_message("❌ Couldn't find a valid notification channel.", ephemeral=True)
         return
 
-    # Find Moderator/Admin roles
-    mod_roles = ["Moderator", "Admin", "Moderators"]
-    role_mentions = [role.mention for role in guild.roles if role.name in mod_roles]
+    # Find the configured mod roles
+    role_mentions = [
+        role.mention for role in interaction.guild.roles
+        if role.name in server_config.get("ping_roles", [])
+    ]
 
     if not role_mentions:
         await interaction.response.send_message("❌ No mod roles found.", ephemeral=True)
@@ -45,7 +54,6 @@ async def modping(interaction: discord.Interaction, reason: str):
 
     # Compose and send message
     ping_message = f"🔔 **Mod Ping from {author.mention}**\n\n**Reason:** {reason}\n{', '.join(role_mentions)}"
-
     await channel.send(ping_message)
     await interaction.response.send_message("✅ Your message was sent privately to the mods.", ephemeral=True)
 
@@ -55,11 +63,11 @@ async def modping(interaction: discord.Interaction, reason: str):
     except discord.Forbidden:
         pass  # User has DMs disabled
 
-token = os.environ.get("DISCORD_TOKEN")
-
+# --- Keep Alive (for UptimeRobot) ---
 from keep_alive import keep_alive
-
-keep_alive()  # starts the webserver
+keep_alive()
 
 # --- Run the bot ---
+token = os.environ.get("DISCORD_TOKEN")
 bot.run(token)
+
