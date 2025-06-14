@@ -6,6 +6,9 @@ from discord.ext import commands
 from datetime import datetime
 import discord.utils
 
+# --- Load language translations ---
+with open("languages.json", "r", encoding="utf-8") as f:
+    translations = json.load(f)
 
 # --- Load server config ---
 with open("config.json", "r") as f:
@@ -13,8 +16,13 @@ with open("config.json", "r") as f:
 
 # --- Bot setup ---
 intents = discord.Intents.default()
+intents.message_content = True  # Optional: only if you plan to read message content later
 bot = commands.Bot(command_prefix="!", intents=intents)
 modping_tree = bot.tree
+
+def t(key, server_config):
+    lang = server_config.get("language", "en")
+    return translations.get(lang, translations["en"]).get(key, key)
 
 # --- Event: When the bot starts up ---
 @bot.event
@@ -25,7 +33,7 @@ async def on_ready():
     print("✅ Command tree synced.")
 
 # --- Slash command: /modping ---
-@modping_tree.command(name="modping", description="Alert the moderators privately with a reason")
+@modping_tree.command(name="modping", description="Alert the moderators privately with a reason")  # Static in code
 @app_commands.describe(reason="Why are you pinging the mods?")
 async def modping(interaction: discord.Interaction, reason: str):
     guild_id = str(interaction.guild.id)
@@ -70,23 +78,24 @@ async def modping(interaction: discord.Interaction, reason: str):
     timestamp = discord.utils.format_dt(datetime.utcnow(), style='F')  # Full date and time
    
     # Compose and send message with timestamp
-    prefix = "🚨 **HIGH PRIORITY ALERT**\n\n" if is_high_priority else ""
+    prefix = f"{t('high_priority', server_config)}\n\n" if is_high_priority else ""
     ping_message = (
-        f"{prefix}"
-        f"🔔 **Mod Ping from {author.mention}**\n\n"
-        f"**Reason:** {reason}\n"
-        f"{', '.join(role_mentions)}\n\n"
-        f"📍 **Origin Channel:** {origin_channel.mention}\n"
-        f"📅 **Sent:** {timestamp}"
+    f"{prefix}"
+    f"🔔 **{t('mod_ping', server_config)} {author.mention}**\n\n"
+    f"**{t('reason', server_config)}:** {reason}\n"
+    f"{', '.join(role_mentions)}\n\n"
+    f"📍 **{t('origin_channel', server_config)}:** {origin_channel.mention}\n"
+    f"📅 **{t('sent', server_config)}:** {timestamp}"
     )
 
+
     await channel.send(ping_message)
-    await interaction.response.send_message("✅ Your message was sent privately to the mods.", ephemeral=True)
+    await interaction.response.send_message(t("public_confirm", server_config), ephemeral=True)
 
 
     # Send DM confirmation
     try:
-        await author.send("✅ Your mod alert has been sent. A moderator will assist you shortly.")
+        await author.send(t("dm_confirm", server_config))
     except discord.Forbidden:
         pass  # User has DMs disabled
 
