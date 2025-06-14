@@ -1,0 +1,74 @@
+{
+  "en": {
+    "mod_ping": "Mod Ping from",
+    "reason": "Reason",
+    "origin_channel": "Origin Channel",
+    "sent": "Sent",
+    "high_priority": "🚨 HIGH PRIORITY ALERT",
+    "dm_confirm": "✅ Your mod alert has been sent. A moderator will assist you shortly.",
+    "public_confirm": "✅ Your message was sent privately to the mods.",
+    "no_roles": "❌ No mod roles found.",
+    "no_channel": "❌ Couldn't find a valid notification channel.",
+    "description": "Alert the moderators privately with a reason"
+  },
+  "fr": {
+    "mod_ping": "Alerte mod de",
+    "reason": "Raison",
+    "origin_channel": "Canal d'origine",
+    "sent": "Envoyé",
+    "high_priority": "🚨 ALERTE HAUTE PRIORITÉ",
+    "dm_confirm": "✅ Votre alerte a été envoyée. Un modérateur va vous aider sous peu.",
+    "public_confirm": "✅ Votre message a été envoyé aux modérateurs en privé.",
+    "no_roles": "❌ Aucun rôle de modérateur trouvé.",
+    "no_channel": "❌ Aucun canal de notification valide trouvé.",
+    "description": "Alerter les modérateurs avec une raison"
+  },
+  "de": {
+    "mod_ping": "Moderatorbenachrichtigung von",
+    "reason": "Grund",
+    "origin_channel": "Ursprungskanal",
+    "sent": "Gesendet",
+    "high_priority": "🚨 DRINGENDE WARNUNG",
+    "dm_confirm": "✅ Deine Mod-Benachrichtigung wurde gesendet. Ein Moderator wird sich bald bei dir melden.",
+    "public_confirm": "✅ Deine Nachricht wurde privat an die Moderatoren gesendet.",
+    "no_roles": "❌ Es wurden keine Moderatoren-Rollen gefunden.",
+    "no_channel": "❌ Es konnte kein gültiger Benachrichtigungskanal gefunden werden.",
+    "description": "Benachrichtige die Moderatoren privat mit einem Grund"
+  },
+  "es": {
+    "mod_ping": "Alerta de moderadores de",
+    "reason": "Razón",
+    "origin_channel": "Canal de origen",
+    "sent": "Enviado",
+    "high_priority": "🚨 ALERTA DE ALTA PRIORIDAD",
+    "dm_confirm": "✅ Tu alerta a los moderadores ha sido enviada. Un moderador te asistirá en breve.",
+    "public_confirm": "✅ Tu mensaje fue enviado en privado a los moderadores.",
+    "no_roles": "❌ No se encontraron roles de moderador.",
+    "no_channel": "❌ No se pudo encontrar un canal de notificación válido.",
+    "description": "Alerta a los moderadores de forma privada con una razón"
+  },
+  "zh": {
+    "mod_ping": "来自的管理员提醒",
+    "reason": "原因",
+    "origin_channel": "来源频道",
+    "sent": "发送时间",
+    "high_priority": "🚨 高优先级警报",
+    "dm_confirm": "✅ 你的管理员提醒已发送。管理员会尽快协助你。",
+    "public_confirm": "✅ 你的消息已私下发送给管理员。",
+    "no_roles": "❌ 未找到管理员角色。",
+    "no_channel": "❌ 未找到有效的通知频道。",
+    "description": "私下提醒管理员，说明原因"
+  },
+  "ja": {
+    "mod_ping": "モデレーター通知：",
+    "reason": "理由",
+    "origin_channel": "発信チャンネル",
+    "sent": "送信日時",
+    "high_priority": "🚨 緊急アラート",
+    "dm_confirm": "✅ あなたのモデレーター通知は送信されました。担当者がすぐに対応します。",
+    "public_confirm": "✅ あなたのメッセージはモデレーターに非公開で送信されました。",
+    "no_roles": "❌ モデレーターの役割が見つかりません。",
+    "no_channel": "❌ 有効な通知チャンネルが見つかりませんでした。",
+    "description": "理由を添えてモデレーターに非公開で通知する"
+  }
+}
