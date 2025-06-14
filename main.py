@@ -49,11 +49,11 @@ async def modping(interaction: discord.Interaction, reason: str):
     await channel.send(ping_message)
     await interaction.response.send_message("✅ Your message was sent privately to the mods.", ephemeral=True)
 
-    # Send ephemeral response and DM
+    # Send DM confirmation
     try:
-    await author.send("✅ Your mod alert has been sent. A moderator will assist you shortly.")
+        await author.send("✅ Your mod alert has been sent. A moderator will assist you shortly.")
     except discord.Forbidden:
-    pass  # User has DMs off
+        pass  # User has DMs disabled
 
 token = os.environ.get("DISCORD_TOKEN")
 
