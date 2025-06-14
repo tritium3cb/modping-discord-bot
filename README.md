@@ -24,7 +24,7 @@ Click the fork button or run:
 ```bash
 git clone https://github.com/yourusername/modpingbot.git
 cd modpingbot
-
+`
 ---
 
 ###  2. 🧠 Set Up Your config.json
