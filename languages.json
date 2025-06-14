@@ -11,6 +11,7 @@
     "no_channel": "❌ Couldn't find a valid notification channel.",
     "description": "Alert the moderators privately with a reason"
     "cooldown_active": "You must wait before using this command again. Remaining time:"
+    "ping_roles": ["Moderator", "Admin"]
   },
   "fr": {
     "mod_ping": "Alerte mod de",
@@ -24,6 +25,7 @@
     "no_channel": "❌ Aucun canal de notification valide trouvé.",
     "description": "Alerter les modérateurs avec une raison"
     "cooldown_active": "Vous devez attendre avant d'utiliser cette commande à nouveau. Temps restant :"
+    "ping_roles": ["Modérateur", "Admin"]
   },
   "de": {
     "mod_ping": "Moderatorbenachrichtigung von",
@@ -37,6 +39,7 @@
     "no_channel": "❌ Es konnte kein gültiger Benachrichtigungskanal gefunden werden.",
     "description": "Benachrichtige die Moderatoren privat mit einem Grund"
     "cooldown_active": "Du musst warten, bevor du diesen Befehl erneut verwenden kannst. Verbleibende Zeit:"
+    "ping_roles": ["Moderator", "Admin"]
   },
   "es": {
     "mod_ping": "Alerta de moderadores de",
@@ -50,6 +53,7 @@
     "no_channel": "❌ No se pudo encontrar un canal de notificación válido.",
     "description": "Alerta a los moderadores de forma privada con una razón"
     "cooldown_active": "Debes esperar antes de usar este comando nuevamente. Tiempo restante:"
+    "ping_roles": ["Moderador", "Admin"]
   },
   "zh": {
     "mod_ping": "来自的管理员提醒",
@@ -63,6 +67,7 @@
     "no_channel": "❌ 未找到有效的通知频道。",
     "description": "私下提醒管理员，说明原因"
     "cooldown_active": "在再次使用此指令之前，您必须等待。剩余时间："
+    "ping_roles": ["版主", "管理员"]
   },
   "ja": {
     "mod_ping": "モデレーター通知：",
@@ -76,5 +81,6 @@
     "no_channel": "❌ 有効な通知チャンネルが見つかりませんでした。",
     "description": "理由を添えてモデレーターに非公開で通知する"
     "cooldown_active": "このコマンドを再度使用するには、しばらく待つ必要があります。残り時間："
+    "ping_roles": ["モデレーター", "管理者"]
   }
 }
