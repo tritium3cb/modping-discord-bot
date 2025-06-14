@@ -3,6 +3,9 @@ import json
 import discord
 from discord import app_commands
 from discord.ext import commands
+from datetime import datetime
+import discord.utils
+
 
 # --- Load server config ---
 with open("config.json", "r") as f:
@@ -53,9 +56,18 @@ async def modping(interaction: discord.Interaction, reason: str):
         return
 
     # Compose and send message
-    ping_message = f"🔔 **Mod Ping from {author.mention}**\n\n**Reason:** {reason}\n{', '.join(role_mentions)}"
+    timestamp = discord.utils.format_dt(datetime.utcnow(), style='F')  # Full date and time
+   
+    # Compose and send message with timestamp
+    ping_message = (
+        f"🔔 **Mod Ping from {author.mention}**\n\n"
+        f"**Reason:** {reason}\n"
+        f"{', '.join(role_mentions)}\n\n"
+        f"📅 **Sent:** {timestamp}"
+)
     await channel.send(ping_message)
     await interaction.response.send_message("✅ Your message was sent privately to the mods.", ephemeral=True)
+
 
     # Send DM confirmation
     try:
