@@ -27,7 +27,7 @@ cd modpingbot
 
 ---
 
-### 2. 🧠 Set Up Your config.json
+###  2. 🧠 Set Up Your config.json
 Create or edit config.json in the root directory. Example:
 {
   "default": {
