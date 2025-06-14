@@ -14,6 +14,9 @@ with open("languages.json", "r", encoding="utf-8") as f:
 with open("config.json", "r") as f:
     config = json.load(f)
 
+# --- Cooldown tracking dictionary ---
+cooldowns = {}
+
 # --- Bot setup ---
 intents = discord.Intents.default()
 intents.message_content = True  # Optional: only if you plan to read message content later
@@ -40,9 +43,23 @@ async def modping(interaction: discord.Interaction, reason: str):
     author = interaction.user
     origin_channel = interaction.channel
 
-    # --- Escalation keyword detection ---
+    # --- Cooldown check ---
+    now = datetime.utcnow().timestamp()
+    last_used = cooldowns.get((guild_id, author.id), 0)
+    server_config = config.get(guild_id, config.get("default", {}))
+    cooldown_seconds = server_config.get("cooldown_seconds", 300)
+
     priority_keywords = ["suicide", "self-harm", "urgent", "help now", "danger", "immediate help"]
     is_high_priority = any(word in reason.lower() for word in priority_keywords)
+
+    if not is_high_priority:
+        if now - last_used < cooldown_seconds:
+            remaining = int(cooldown_seconds - (now - last_used))
+            await interaction.response.send_message(f"⏳ {t('cooldown_active', server_config)} {remaining}s", ephemeral=True)
+            return
+
+    # --- Update cooldown tracker ---
+    cooldowns[(guild_id, author.id)] = now
 
     if is_high_priority:
         print("[ALERT] High-priority keyword detected.")
@@ -79,25 +96,40 @@ async def modping(interaction: discord.Interaction, reason: str):
    
     # Compose and send message with timestamp
     prefix = f"{t('high_priority', server_config)}\n\n" if is_high_priority else ""
-    ping_message = (
-    f"{prefix}"
-    f"🔔 **{t('mod_ping', server_config)} {author.mention}**\n\n"
-    f"**{t('reason', server_config)}:** {reason}\n"
-    f"{', '.join(role_mentions)}\n\n"
-    f"📍 **{t('origin_channel', server_config)}:** {origin_channel.mention}\n"
-    f"📅 **{t('sent', server_config)}:** {timestamp}"
-    )
+    embed = discord.Embed(
+    title=f"{t('mod_ping', server_config)} {author.display_name}",
+    description=reason,
+    color=discord.Color.red() if is_high_priority else discord.Color.orange()
+)
+embed.add_field(name=t("origin_channel", server_config), value=origin_channel.mention, inline=False)
+embed.add_field(name=t("sent", server_config), value=timestamp, inline=False)
+embed.set_footer(text=f"User ID: {author.id}")
+embed.set_thumbnail(url=author.display_avatar.url)
 
+message = await channel.send(
+    content=prefix + ', '.join(role_mentions),
+    embed=embed
+)
 
-    await channel.send(ping_message)
-    await interaction.response.send_message(t("public_confirm", server_config), ephemeral=True)
+await message.add_reaction("✅")
 
+await interaction.response.send_message(t("public_confirm", server_config), ephemeral=True)
 
-    # Send DM confirmation
-    try:
-        await author.send(t("dm_confirm", server_config))
-    except discord.Forbidden:
-        pass  # User has DMs disabled
+# Send DM confirmation
+try:
+    await author.send(t("dm_confirm", server_config))
+except discord.Forbidden:
+    pass  # User has DMs disabled
+
+@bot.event
+async def on_raw_reaction_add(payload):
+    if str(payload.emoji) == "✅":
+        guild = bot.get_guild(payload.guild_id)
+        member = guild.get_member(payload.user_id)
+        if member and any(role.name in config.get(str(guild.id), {}).get("ping_roles", []) for role in member.roles):
+            channel = guild.get_channel(payload.channel_id)
+            message = await channel.fetch_message(payload.message_id)
+            await message.reply(f"✅ Acknowledged by {member.mention}")
 
 # --- Keep Alive (for UptimeRobot) ---
 from keep_alive import keep_alive
