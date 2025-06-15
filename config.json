@@ -3,6 +3,7 @@
     "notification_channels": ["bot-notifs"],
     "ping_roles": ["Moderator", "Admin"],
     "language": "en",
-    "cooldown_seconds": 300
+    "cooldown_seconds": 300,
+    "command_name": "modping"
   }
 }
