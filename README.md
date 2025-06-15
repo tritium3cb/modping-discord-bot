@@ -16,7 +16,7 @@ ModPingBot is a lightweight Discord bot that allows users to alert moderators pr
 ---
 
 ## 🌐 Language Support
-This bot supports the following languages for all user-facing messages:
+This bot supports the following languages for all user-facing messages (On a per-server basis):
 
 🇬🇧 English (en)
 
