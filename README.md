@@ -64,7 +64,10 @@ Create or edit config.json in the root directory. Example:
 {
   "default": {
     "notification_channels": ["bot-notifs"],
-    "ping_roles": ["Moderator", "Admin"]
+    "ping_roles": ["Moderator", "Admin"],
+    "language": "en",
+    "cooldown_seconds": 300,
+    "command_name": "modping"
   }
 }
 ```
