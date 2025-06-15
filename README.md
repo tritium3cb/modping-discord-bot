@@ -30,6 +30,20 @@ This bot supports the following languages for all user-facing messages (On a per
 
 🇫🇷 French (fr)
 
+🇵🇹 Portuguese (pt)
+
+🇷🇺 Russian (ru)
+
+🇮🇩 Indonesian (in)
+
+🇹🇷 Turkish (tr)
+
+🇰🇷 Korean (ko)
+
+🇮🇹 Italian (it)
+
+🇪🇬 Arabic (ar) (Egyptian Arabic)
+
 ---
 
 ## ⚙️ Setup Instructions (Render Hosting)
