@@ -71,7 +71,6 @@ Create or edit config.json in the root directory. Example:
   }
 }
 ```
-Replace 123456789012345678 with your Discord server’s ID.
 
 notification_channels is a list of channel names where alerts will be sent.
 
