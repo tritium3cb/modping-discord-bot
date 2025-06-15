@@ -76,41 +76,6 @@ ping_roles is a list of roles that will be tagged in the alert.
 
 The "default" config is used if a server-specific entry isn't found.
 
-### 🔧 Setting the Language
-To set the language used in messages, edit the config.json file and add the "language" field under the appropriate server section. For example:
-
-```json
-{
-  "default": {
-    "notification_channels": ["bot-notifs"],
-    "ping_roles": ["Moderator", "Admin"],
-    "language": "de"
-  }
-}
-```
-The "language" value must be one of the following codes:
-
-"en" – English
-
-"de" – German
-
-"es" – Spanish
-
-"zh-CN" – Simplified Chinese
-
-"ja" – Japanese
-
-"fr" – French
-
-If the language code is missing or invalid, the bot will fall back to English ("en").
-
-❓ FAQ
-Can the bot automatically detect the user's language?
-No — Discord does not expose users' client language settings via the API. Messages are shown in the language defined by the server's configuration in config.json.
-
-Can users choose their own language?
-Not yet — but support for per-user language preferences may be added in a future update. Contributions welcome!
-
 ---
 
 ### 3. 🚀 Deploy to Render (Free Plan)
