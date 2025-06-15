@@ -51,10 +51,6 @@ Create or edit config.json in the root directory. Example:
   "default": {
     "notification_channels": ["bot-notifs"],
     "ping_roles": ["Moderator", "Admin"]
-  },
-  "123456789012345678": {
-    "notification_channels": ["staff-alerts"],
-    "ping_roles": ["ModTeam"]
   }
 }
 ```
